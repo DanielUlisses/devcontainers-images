@@ -8,7 +8,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
   pre-commit \
   vim \
   sudo \
-  htop
+  htop \
+  tree \
+  make \
+  nodejs \
+  neovim \
+  ripgrep \
+  jq
 
 USER vscode
 
@@ -18,5 +24,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
   -p git \
   -p https://github.com/zsh-users/zsh-completions \
   -p https://github.com/zsh-users/zsh-autosuggestions
+
+RUN git clone https://github.com/NvChad/NvChad ~/.config/nvim
 
 ENV SHELL /usr/bin/zsh
