@@ -1,0 +1,17 @@
+FROM python:bookworm as az
+
+RUN echo "UTC" > /etc/timezone
+
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+  && apt install -y \
+  curl \
+  gcc \
+  git \
+  make \
+  nodejs \
+  sudo \
+  unzip \
+  wget 
+
+  RUN pip install --upgrade pip
+  RUN pip install azure-cli

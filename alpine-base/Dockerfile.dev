@@ -1,0 +1,44 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} as dev
+
+RUN apk update && \
+    apk add --no-cache alpine-sdk \
+    automake \
+    autoconf \
+    bash \
+    cmake \
+    clang \
+    fd \ 
+    fzf \
+    gcompat \
+    gettext \
+    gzip \
+    htop \
+    jq \
+    lazygit \
+    neovim \
+    ripgrep \
+    tree \
+    unzip \
+    xz \
+    zsh \
+    zsh-theme-powerlevel10k \
+    && rm -rf /var/cache/apk/*
+
+RUN pip install pre-commit neovim pep8
+RUN curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+
+ARG UNAME=vscode
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g $GID -o $UNAME
+RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+USER $UNAME
+ENV SHELL /bin/zsh
+
+RUN mkdir -p ~/.local/share/zsh/plugins
+RUN ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
+RUN git clone https://github.com/DanielUlisses/dotfiles.git ~/.dotfiles
+RUN chmod +x ~/.dotfiles/install.sh
+RUN cd ~/.dotfiles && ./install.sh
+RUN git clone https://github.com/DanielUlisses/lazyvim.git ~/.config/nvim
