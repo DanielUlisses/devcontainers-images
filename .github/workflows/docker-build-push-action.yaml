@@ -28,13 +28,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN  }}
 
       - name: build and push base container
-        run: make build-ubuntu-base
+        run: make build-debian-dev
 
       - name: build and push terraform container
-        run: make build-terraform-image
+        run: make build-alpine-dev
 
-      - name: build and push azure container
-        run: make build-azure-terraform
-
-      - name: build and push aws container
-        run: make build-aws-terraform
