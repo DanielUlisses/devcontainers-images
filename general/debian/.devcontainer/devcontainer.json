@@ -1,0 +1,28 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+  "features": {
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "1.6.6",
+      "terragrunt": "0.53.8",
+      "tflint": "0.50.3",
+      "installTerraformDocs": true,
+      "InstallTFsec": true,
+      "installSentinel": false
+    },
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.22.2",
+      "golangciLintVersion": "1.56.0"
+    },
+    "ghcr.io/devcontainers/features/azure-cli:1": {}
+  },
+	"runArgs": [
+    "-v",
+    "${env:SSH_AUTH_SOCK}:/tmp/ssh-agent.socket",
+    "-e",
+    "SSH_AUTH_SOCK=/tmp/ssh-agent.socket"
+  ],
+  "remoteUser": "vscode"
+}

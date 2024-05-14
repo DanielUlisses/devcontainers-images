@@ -9,8 +9,9 @@ ARG TFSEC_VERSION
 
 # Install Golang
 RUN curl -O -L https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz
-RUN tar -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz -C /usr/bin
+RUN tar -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz -C /usr/local
 RUN rm go${GOLANG_VERSION}.linux-amd64.tar.gz
+RUN export PATH=$PATH:/usr/local/go/bin
 
 # Terratest Config
 ARG GOPROJECTPATH=/go/src/app
