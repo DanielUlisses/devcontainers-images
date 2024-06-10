@@ -47,11 +47,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN  }}
 
+      - name: Run script file
+        run: |
+          folder=$(basename ${{ matrix.folder }})
+          shell: bash
+
       - name: build and push base container
         uses: devcontainers/ci@v0.2
         with:
           subFolder: ${{ matrix.folder }}
-          imageName: r00ts/${{ basename(matrix.folder) }}
-          cacheFrom: r00ts/${{ basename(matrix.folder) }}
+          imageName: r00ts/${{ folder }}
+          cacheFrom: r00ts/${{ folder }}
           push: always
 
