@@ -12,6 +12,8 @@ name: Publish Docker image
 on:
   push:
     branches: [main]
+    paths:
+      - .github
 
 jobs:
   push_to_registry:
@@ -35,5 +37,13 @@ jobs:
           subFolder: .github/infinitum
           imageName: r00ts/infinitum
           cacheFrom: r00ts/infinitum
+          push: always
+
+      - name: build and push base container
+        uses: devcontainers/ci@v0.2
+        with:
+          subFolder: .github/edpods
+          imageName: r00ts/edpods
+          cacheFrom: r00ts/edpods
           push: always
 
