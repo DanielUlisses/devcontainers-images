@@ -56,7 +56,7 @@ jobs:
         uses: devcontainers/ci@v0.2
         with:
           subFolder: ${{ matrix.folder }}
-          imageName: r00ts/${{ folder }}
-          cacheFrom: r00ts/${{ folder }}
+          imageName: r00ts/$folder
+          cacheFrom: r00ts/$folder
           push: always
 
