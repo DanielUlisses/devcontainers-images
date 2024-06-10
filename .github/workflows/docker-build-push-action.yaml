@@ -22,10 +22,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - id: jobs
-        uses: philips-labs/list-folders-action@v1
+      - name: list-folders-action
+        uses: Drafteame/list-folders-action@v0.1.0
         with:
-          path: .github
+          paths:
+            .github
+          omit:
+            workflows        
 
   push_to_registry:
     name: Push Docker image to Docker Hub
